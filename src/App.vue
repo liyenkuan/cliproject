@@ -1,9 +1,10 @@
 <template>
-<div class="w-100">
+<div class="w-100" >
+<loading :active="isLoading" ></loading>
   <nav class="navbar navbar-expand-lg navbar-light fixed-top navContainer ">
     <div class="container-fluid">
         <div class="col nav_one">
-          <a class="navbar-brand" href="#" style="color:#9CBAC6;">NaNail</a>
+          <a class="navbar-brand" href="#" style="color:#47ABA7;">NaNail</a>
         </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -11,18 +12,13 @@
             <div class="collapse navbar-collapse nav_ul" id="navbarText">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item " >
-                <router-link to="/" class="nav-link " style="color:#9CBAC6;" @click="addBtncss()">
-                                <span class="material-icons">home
-                </span>Home</router-link>
+                <router-link to="/" class="nav-link " style="color:#47ABA7"  @click="addBtncss()">Home</router-link>
                 </li>
                 <li class="nav-item">
-                <router-link to="/products" class="nav-link" @click="addBtncss()" >商品列表</router-link>
+                <router-link to="/products" class="nav-link" style="color:white;" @click="addBtncss()" >服務項目</router-link>
                 </li>
                 <li class="nav-item">
-                  <router-link to="/backside" class="nav-link" @click="addBtncss()" >後台登入</router-link>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#" @click="addBtncss()">立即預約</a>
+                  <router-link to="/backside" class="nav-link" style="color:white;"  @click="addBtncss()" >後台登入</router-link>
                 </li>
               </ul>
             </div>
@@ -30,24 +26,71 @@
         </nav>
   </div>
   <router-view/>
-   <footer class="footer   py-1 footer_calss">
+    <div class="rounded-circle " id="one" >
+      <div class="btn-group position-relative" >
+        <span class="material-icons rounded-circle one"  @click="openOrder()">
+          shopping_cart
+        </span>
+        <div class="rounded-circle bg-danger text-white position-absolute text-center"
+              style="font-size:8px; width:16px;right: 1px;
+                    top: -68px;
+                    z-index: 11;">{{cartData.length}}</div>
+        <!--<div class="dropdown-menu dropdown-menu-end " aria-labelledby="dropdownMenuClickableInside" style="width:400px; padding:20px;">
+          <table class="table " >
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">品項</th>
+                <th scope="col">數量</th>
+                <th scope="col">價格</th>
+                <th scope="col">刪除</th>
+              </tr>
+            </thead>
+            <tbody v-for = "(item , key) in cartData" :key="key" >
+              <tr>
+                <th scope="row">{{key+1}}</th>
+                <td>{{item.product.category}}</td>
+                <td>{{item.qty}}</td>
+                <td>{{item.product.price}}</td>
+                <td  :data-id="item.id" @click="deletCart(item.id)">
+                  <span class="material-icons" style="font-size: 24px;" :data-id="item.id">
+                    delete
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="mx-auto" style="width: 300px;">
+             <button type="button" class="btn btn-dark btn-lg btn-block  " style="width: 300px;" @click="openOrder()">全部購買</button>
+          </div>
+        </div>-->
+      </div>
+    </div>
+   <footer class="footer   py-1 footer_calss" style="  background-color: black;opacity: 0.8;">
     <div class="container">
       <ul class="row d-flex flex-wrap" style="align-items: center;">
         <li class="footer_li">
-          <span style="color:#9CBAC6;">追蹤社群 ：</span>
+          <span style="color:#47ABA7;">追蹤社群 ：</span>
           <a href="#" class="fa fa-facebook rounded-circle"  style="  background: #3B5998; color: white;  margin-right:20px; " ></a>
           <a href="#" class="fa fa-twitter rounded-circle" style="  background: #55ACEE; color: white; margin-right:20px;"></a>
           <a href="#" class="fa fa-instagram rounded-circle" style="  background: #125688; color: white; margin-right:20px;"></a>
           </li>
         <li class="footer_li">
-          <span style="color:#9CBAC6;" >聯絡資訊 ：0912-345-678</span>
+          <span style="color:#47ABA7;" >聯絡資訊 ：0912-345-678</span>
         </li>
         <li class="footer_li">
-        <span style="color:#9CBAC6; ">＠此為個人練習用作品，無任何商業用途</span>
+        <span style="color:#47ABA7; ">＠此為個人練習用作品，無任何商業用途</span>
         </li>
       </ul>
     </div>
   </footer>
+  <Pushorder :cart="orderData"
+             @push-id="deletCart"
+             :total="total"
+             @post-coupon="postCouponCode"
+             :finalprice="deduct"
+             @open-order="toOrder"
+  ></Pushorder>
 </template>
 
 <style lang="scss">
@@ -102,7 +145,9 @@ quotes: "" "";
 @import "bootstrap";
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,900&display=swap');
 .navContainer{
-  background-color: white;
+  // background-color: white;
+  background-color: black;
+  opacity: 0.8;
   font-weight: 900;
   /* border: 1px solid #000; */
   box-shadow: 0px 5px 6px #00000029;
@@ -127,18 +172,17 @@ quotes: "" "";
 }
 
 .nav_ul{
-  max-width: 504px;
+  max-width: 480px;
   font-size: 24px;
   font-family: 'Krona One', sans-serif;
-  // justify-content: flex-end;
 }
 .nav_ul li{
   border-bottom: 3px solid #ffffff00 ;
-  // padding: 8px;
   font-weight: 900;
 };
 .nav_ul li:hover{
-  border-bottom: 3px solid #9CBAC6; ;
+  border-bottom: 3px solid #47ABA7; ;
+  // background-color: #9CBAC6;
 }
 .banner_container{
   padding-top: 0px;
@@ -148,7 +192,7 @@ quotes: "" "";
   font-family: 'Material Icons';
   font-weight: normal;
   font-style: normal;
-  font-size: 24px;  /* Preferred icon size */
+  font-size: 32px;  /* Preferred icon size */
   // display: inline-block;
   line-height: 0;
   text-transform: none;
@@ -188,9 +232,29 @@ quotes: "" "";
 .footer_li {
   width :33%;
 }
+.one {
+  position: fixed;
+  top: 40px;
+  right: 120px;
+  // border:3px solid #000;
+  // width: 100px;
+  // height: 100px;
+  // margin: 20px;
+  color: #47ABA7;
+  // background-color:#9CBAC6;
+  // margin: 0 auto;
+  // padding:34px;
+  font-size: 48px;
+  z-index:10;
+  cursor: pointer;
+}
 @media (max-width: 767px) {
   .footer_li {
     width :100%;
+  }
+  .nav-link {
+    margin:0 auto;
+    text-align:center;
   }
 }
 @media (max-width: 375px) {
@@ -206,11 +270,99 @@ quotes: "" "";
  }
 </style>
 <script>
+import Modal from 'bootstrap/js/dist/modal'
+import Pushorder from '@/components/Pushorder.vue'
+import emitter from '@/assets/javascript/emitter'
 let navBtn = ''
+let myOrder = ''
+const api = 'https://vue3-course-api.hexschool.io/'
+const cart = 'api/password/cart'
 export default {
+  components: {
+    Pushorder
+  },
+  data () {
+    return {
+      cartData: [],
+      orderData: [],
+      isLoading: false,
+      total: 0,
+      deduct: 0
+    }
+  },
   methods: {
     addBtncss () {
       navBtn.classList.remove('show')
+    },
+    getcart () {
+      this.isLoading = true
+      this.axios.get(`${api}${cart}`)
+        .then((res) => {
+          this.isLoading = false
+          console.log(res)
+          this.cartData = res.data.data.carts
+          console.log(this.cartData)
+          this.orderData = this.cartData
+          this.totalPrice()
+          // emitter.emit('update-cartdata')
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
+    deletCart (id) {
+      this.isLoading = true
+      console.log(id)
+      this.axios.delete(`${api}${cart}/${id}`)
+        .then((res) => {
+          console.log(res)
+          this.getcart()
+          this.isLoading = false
+          myOrder.hide()
+          // emitter.emit('update-cartdata')
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
+    openOrder () {
+      this.orderData = this.cartData
+      emitter.emit('update-cartdata')
+      myOrder.show()
+    },
+    totalPrice () {
+      let price = 0
+      console.log(this.cartData)
+      this.cartData.forEach((item) => {
+        price += item.final_total
+      })
+      this.total = Math.round(price)
+      console.log(this.total)
+    },
+    postCouponCode (e) {
+      console.log(e)
+      const coupon = 'api/password/coupon'
+      const code = e
+      this.axios.post(`${api}${coupon}`, { data: { code } })
+        .then((res) => {
+          console.log(res)
+          const finalTotal = Math.round(res.data.data.final_total)
+          console.log(finalTotal)
+          const deductSum = this.total - finalTotal
+          console.log(deductSum)
+          this.deduct = deductSum
+          this.getcart()
+          this.totalPrice()
+          myOrder.hide()
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
+    toOrder () {
+      // this.$router.push({ name: 'Order', params: { cart: this.orderData } })
+      this.$router.push('/order')
+      myOrder.hide()
     }
   },
   mounted () {
@@ -223,6 +375,11 @@ export default {
     //     navBGC.classList.remove('navColor')
     //   }
     // }
+    myOrder = new Modal(document.querySelector('#pushorderModal'))
+    this.getcart()
+    emitter.on('update-cart', () => {
+      this.getcart()
+    })
   }
 }
 </script>

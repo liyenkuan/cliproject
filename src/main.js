@@ -9,6 +9,10 @@ import 'jquery'
 import 'bootstrap'
 import VueAxios from 'vue-axios'
 import axios from 'axios'
+import Loading from 'vue3-loading-overlay'
+// Import stylesheet
+import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
+import ProductsCart from '@/components/ProductsCart.vue'
 
 defineRule('email', email)
 defineRule('required', required)
@@ -23,6 +27,8 @@ app.use(VueAxios, axios)
 app.component('Form', Form)
 app.component('Field', Field)
 app.component('ErrorMessage', ErrorMessage)
+app.component('Loading', Loading)
+app.component('ProductsCart', ProductsCart)
 
 app.mount('#app')
 router.beforeEach((to, from, next) => {

@@ -1,4 +1,5 @@
 <template>
+<!----toast---->
 <div class="container container-p h-100">
 <div class="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true" ref="toast">
   <div class="d-flex">
@@ -8,25 +9,36 @@
     <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
   </div>
 </div>
+<!----toast---->
+<div class="py-5 px-5 border w-75 m-auto">
 <Form v-slot="{ errors }" >
-  <label for="address" class="col align-self-start">email</label>
-  <Field id="email" name="email" type="email" class="form-control"
-    :class="{ 'is-invalid': errors['email'] }"
-    placeholder="請輸入 Email" rules="email|required"
-    v-model="user.email"></Field>
-<error-message name="email" class="invalid-feedback"></error-message>
-<div class="mb-3">
-  <label for="address" class="form-label">密碼</label>
-  <Field id="address" name="密碼" type="text" class="form-control"
-  :class="{ 'is-invalid': errors['密碼'] }"
-           placeholder="請輸入電話" :rules="isPassword" v-model="user.password">
-           </Field>
-  <error-message name="密碼" class="invalid-feedback"></error-message>
+  <div class="row justify-content-md-center ">
+    <div class="col-md-6 ">
+          <label for="address" class="col align-self-start">email</label>
+          <Field id="email" name="email" type="email" class="form-control "
+            :class="{ 'is-invalid': errors['email'] }"
+            placeholder="請輸入 Email" :rules="isEmail"
+            v-model="user.email"></Field>
+        <error-message name="email" class="invalid-feedback"></error-message>
+    </div>
+  </div>
+  <div class="row justify-content-md-center pt-3">
+    <div class="col-md-6 ">
+      <label for="address" class="form-label">密碼</label>
+      <Field id="address" name="密碼" type="text" class="form-control"
+      :class="{ 'is-invalid': errors['密碼'] }"
+            placeholder="請輸入電話" :rules="isPassword" v-model="user.password">
+            </Field>
+    <error-message name="密碼" class="invalid-feedback"></error-message>
+    </div>
+  </div>
+  <div class="row justify-content-md-center">
+    <div class="col-md-3 pt-3" >
+      <button type="button" class="btn btn-secondary btn-lg btn-block w-100 " @click="onSubmit">登入</button>
+    </div>
+  </div>
+</Form>
 </div>
-    </Form>
-        <div class="mx-auto" style="width: 200px;">
-            <button type="button" class="btn btn-warning mx-auto" style="width: 200px;" @click="onSubmit">登入</button>
-        </div>
 </div>
 </template>
 <script>
@@ -88,7 +100,14 @@ export default {
     },
     isPassword (value) {
       if (value === '') {
-        return '需要正確的密碼'
+        return '請輸入正確的密碼格式'
+      } else {
+        return true
+      }
+    },
+    isEmail (value) {
+      if (value === '') {
+        return '請輸入正確的email格式'
       } else {
         return true
       }
@@ -108,7 +127,7 @@ export default {
 </script>
 <style lang="scss">
   .container-p{
-    padding : 120px;
-    padding-bottom : 800px;
+    padding-top : 120px;
+    padding-bottom : 400px;
   }
 </style>

@@ -11,7 +11,7 @@
         <div class="card_text">
         <p class="card_title" >優雅 指屬於你</p>
         <p class="card_sub" >享受最優質的設計體驗</p>
-        <button type="button" class="btn btn-lg banner_btn" >立即預約</button>
+        <button type="button" class="btn btn-lg banner_btn" @click="golist()">立即選購</button>
       </div>
     </div>
     <div class="carousel-item" data-bs-interval="2000">
@@ -19,7 +19,7 @@
         <div class="card_text">
          <p class="card_title" >優雅 指屬於你</p>
         <p class="card_sub" >享受最優質的設計體驗</p>
-        <button type="button" class="btn btn-lg banner_btn" >立即預約</button>
+        <button type="button" class="btn btn-lg banner_btn" @click="golist()" >立即選購</button>
       </div>
     </div>
     <div class="carousel-item">
@@ -27,7 +27,7 @@
         <div class="card_text">
         <p class="card_title" >優雅 指屬於你</p>
         <p class="card_sub" >享受最優質的設計體驗</p>
-        <button type="button" class="btn btn-lg banner_btn" >立即預約</button>
+        <button type="button" class="btn btn-lg banner_btn" @click="golist()">立即選購</button>
       </div>
     </div>
   </div>
@@ -52,6 +52,11 @@ export default {
   name: 'Home',
   components: {
     HelloWorld
+  },
+  methods: {
+    golist () {
+      this.$router.push('/products')
+    }
   }
 }
 </script>
@@ -82,15 +87,23 @@ export default {
   filter: contrast(100%);
 }
 .banner_btn {
-  background-color: #9CBAC6;
+  border: 2px solid #47ABA7;
+  background-color: #47ABA7;
   color: white;
   font-weight:900;
+  // border:0;
+  font-size: 24px;
+}
+.banner_btn:hover {
+  // border: 2px solid #47ABA7;
+  background-color: white;
+  color: #47ABA7;
 }
 @media (max-width: 767px) {
   .bgcard {
     position: relative;
-    height: 328px;
-    padding-top:80px;
+    height: 300px;
+    // padding-top:72px;
   }
   .card_text {
     display: none;
@@ -99,6 +112,9 @@ export default {
     // right:130px;
     // font-family: 'Krona One', sans-serif;
     // color: white;
+  }
+  .img_class {
+    height: 300px;
   }
   .card_title {
     display: none;
