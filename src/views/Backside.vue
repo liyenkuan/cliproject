@@ -114,6 +114,17 @@ export default {
     },
     toEdit () {
       this.$router.push('/backside/Editproduct')
+    },
+    verify () {
+      const token = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*\=\s*([^;]*).*$)|^.*$/, '$1') //eslint-disable-line
+      this.axios.defaults.headers.common['Authorization'] = token //eslint-disable-line
+      this.axios.post(`${api}api/user/check`)
+        .then((res) => {
+          console.log(res)
+          if (res.data.success) {
+            this.$router.push('/backside/Editproduct')
+          }
+        })
     }
   },
   mounted () {
@@ -121,7 +132,7 @@ export default {
     toast = new Toast(toastEl, {
       delay: 3000
     })
-    // toast.show()
+    this.verify()
   }
 }
 </script>

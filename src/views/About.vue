@@ -24,12 +24,12 @@
             <input type="button" value="more"  class="card_btn" :data-id="item.id" @click="toProductspage(item.id)">
           </div>
           </div>
-          <p class="product_name px-3 pt-3">{{item.title}}</p>
+          <!--<p class="product_name px-3 pt-3">{{item.title}}</p>
           <p  class="product_sub  px-3 ">{{item.category}}</p>
           <div class="d-flex justify-content-between ">
           <p class="product_sub px-3" style="text-decoration:line-through; ">原價：{{item.origin_price}}</p>
           <p class="product_name px-3 ">售價：{{item.price}}</p>
-          </div>
+          </div>-->
       </li>
 </ul>
 </template>
@@ -93,12 +93,12 @@ export default {
   padding-top:20px;
 }
 .productcardLi  {
-  width: 300px;
+  width: 400px;
   // padding-bottom: 20px;
-  height: 416px;
+  height: 200px;
   background-color: white;
-  margin-right: 30px;
-  margin-bottom:20px;
+  margin-right: 50px;
+  margin-bottom:50px;
   line-height:20px;
   box-shadow: 0px 3px 6px #00000029;
   border: 1px solid #DEE2E6;
@@ -106,7 +106,7 @@ export default {
 .productcard-img {
   display: block;
   width: 100%;
-  max-height: 280px;
+  max-height: 200px;
   object-fit: cover;
   object-position: center ;
 }
@@ -125,7 +125,7 @@ export default {
   position: absolute;
   box-sizing: border-box;
   background-color: rgba(0,0,0,.3);
-  padding-top: 100px
+  padding-top: 60px
 }
 .card_btn {
   color :white;
@@ -201,7 +201,7 @@ export default {
     position: absolute;
     box-sizing: border-box;
     background-color: rgba(0,0,0,.3);
-    padding-top: 100px
+    padding-top: 160px
 }
 .card_btn {
   color :white;
@@ -211,7 +211,7 @@ export default {
   font-size: 24px;
   width:150px;
 }
-  .card_b ody:hover{
+  .card_body:hover{
     -webkit-transition: 500ms;
     opacity: 1;
   }

@@ -17,7 +17,7 @@
                         <input type="text" class="form-control" v-model="editProduct.imageUrl"
                                 placeholder="請輸入圖片連結">
                         </div>
-                        <img class="img-fluid" src="" alt="">
+                        <img class="img-fluid" :src="editProduct.imageUrl" alt="">
                     </div>
                     <div>
                         <button class="btn btn-outline-primary btn-sm d-block w-100">

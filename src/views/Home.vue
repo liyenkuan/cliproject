@@ -5,6 +5,7 @@
     <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
     <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
   </div>
+<div data-aos="zoom-in">
   <div class="carousel-inner bgcard">
     <div class="carousel-item active " data-bs-interval="10000">
       <img src="https://i.imgur.com/k5fjpNM.jpg" class="img-fluid img_class" alt="...">
@@ -31,6 +32,7 @@
       </div>
     </div>
   </div>
+</div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Previous</span>
@@ -47,7 +49,8 @@
 <script>
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
-
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 export default {
   name: 'Home',
   components: {
@@ -57,6 +60,9 @@ export default {
     golist () {
       this.$router.push('/products')
     }
+  },
+  mounted () {
+    AOS.init()
   }
 }
 </script>

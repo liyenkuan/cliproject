@@ -7,28 +7,28 @@
         <hr>
   </div>
   <ul class="d-flex justify-content-center w-100 flex-wrap cardUl">
-      <li class=" cardLi" >
+      <li class=" cardLi" data-aos="fade-down-right" >
         <div class="card_img">
         <a href="#/products">
         <img src="https://i.imgur.com/pUdpzqT.jpg" class="card-img" alt="...">
         </a>
           </div>
       </li>
-      <li class="cardLi">
+      <li class="cardLi" data-aos="fade-down-left">
         <div class="card_img">
          <a href="#/products" >
           <img src="https://i.imgur.com/b9gBymp.jpg" class="card-img" alt="...">
           </a>
         </div>
       </li>
-            <li class=" cardLi" >
+      <li class=" cardLi" data-aos="fade-up-right">
         <div class="card_img">
         <a href="#/products">
         <img src="https://i.imgur.com/1Phg1QZ.jpg" class="card-img" alt="...">
         </a>
           </div>
       </li>
-      <li class="cardLi">
+      <li class="cardLi" data-aos="fade-up-left">
         <div class="card_img">
          <a href="#/products" >
           <img src="https://i.imgur.com/VqjcO3o.jpg" class="card-img" alt="...">
@@ -37,15 +37,15 @@
       </li>
 </ul>
 <div class=" banner">
-     <!--<div class="works_title">
+     <div class="works_title" style="">
       <span class="material-icons">
         touch_app
           </span>
-          預約服務
+          熱門精選
         <hr>
-      </div>-->
+      </div>
   <div class="w-100 reserve d-flex flex-wrap">
-        <div class="reserve_cardone">
+        <!--<div class="reserve_cardone">
          <div class="card_Inner ">
         <div class=" row">
           <div class="row">
@@ -71,13 +71,54 @@
           </div>
         </div>
       </div>
-      </div>
+      </div>-->
+      <swiper :slidesPerView="1" :spaceBetween="20" :freeMode="true" data-aos="fade-up"
+              :breakpoints='{
+                "640": {
+                  "slidesPerView": 1,
+                  "spaceBetween": 20
+                },
+                "768": {
+                  "slidesPerView": 2,
+                  "spaceBetween": 40
+                },
+                "1024": {
+                  "slidesPerView": 3,
+                  "spaceBetween": 50
+                }
+              }'
+              :pagination='{
+                "clickable": true
+              }'
+              class="mySwiper">
+          <swiper-slide><div class="swiper_content "><img src="https://i.imgur.com/7v2i8Ki.jpg" class="swiper_img " alt="..."></div></swiper-slide>
+          <swiper-slide><div class="swiper_content"><img src="https://i.imgur.com/ExJmxt4.jpg" class="swiper_img" alt="..."></div></swiper-slide>
+          <swiper-slide><div class="swiper_content"><img src="https://i.imgur.com/UF3Wl7z.jpg" class="swiper_img" alt="..."></div></swiper-slide>
+          <swiper-slide><div class="swiper_content"><img src="https://i.imgur.com/zKxHZm3.jpg" class="swiper_img" alt="..."></div></swiper-slide>
+          <swiper-slide><div class="swiper_content"><img src="https://i.imgur.com/GJTwAoO.jpg" class="swiper_img" alt="..."></div></swiper-slide>
+          <swiper-slide><div class="swiper_content"><img src="https://i.imgur.com/nJM5uyT.jpg" class="swiper_img" alt="..."></div></swiper-slide>
+          <swiper-slide><div class="swiper_content"><img src="https://i.imgur.com/1ur4Yx7.jpg" class="swiper_img" alt="..."></div></swiper-slide>
+          <swiper-slide><div class="swiper_content"><img src="https://i.imgur.com/lrT9lab.jpg" class="swiper_img" alt="..."></div></swiper-slide>
+          <swiper-slide><div class="swiper_content"><img src="https://i.imgur.com/ZN083W3.jpg" class="swiper_img" alt="..."></div></swiper-slide>
+      </swiper>
   </div>
 </div>
 </template>
 
 <script>
+import { Swiper, SwiperSlide } from 'swiper/vue'
+// Import Swiper styles
+import 'swiper/swiper.scss'
+import 'swiper/components/pagination/pagination.min.css'
+// import './style.css'
+import 'swiper/swiper-bundle.css'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 export default {
+  components: {
+    Swiper,
+    SwiperSlide
+  },
   name: 'HelloWorld',
   // props: {
   //   msg: String
@@ -86,11 +127,26 @@ export default {
     toProducts () {
       this.$router.push('/products')
     }
+  },
+  mounted () {
+    AOS.init()
   }
 }
 </script>
 <style lang="scss">
+// @import 'swiper/swiper-bundle.css'
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,900&display=swap');
+.swiper_img {
+  display: block;
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  object-position: center ;
+}
+.swiper_content {
+  width:400px;
+  height:500px;
+}
 .works_title {
   // padding-bottom: 80px;
   padding: 40px;
@@ -143,21 +199,23 @@ export default {
 }
 .banner{
   /* display: flex; */
-  background-attachment: fixed;
-  background-image: url("https://i.imgur.com/agOEBLH.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  // background-attachment: fixed;
+  // background-image: url("https://i.imgur.com/agOEBLH.jpg");
+  // background-repeat: no-repeat;
+  // background-position: center;
+  // background-size: cover;
   max-width: 100%;
   // height: 1500px;
+  // background-color: black;
+  // opacity: 0.8;
 }
 .reserve {
   // height:560px;
   // background-color:white;
   padding-right: 48px;
-  padding-top: 120px;
+  // padding-top: 120px;
   padding-left: 72px;
-  padding-bottom:400px;
+  padding-bottom:100px;
 }
 .reserve_cardone {
   // background-color:#FFF1E2;
@@ -191,8 +249,8 @@ export default {
     background-color:white;
     padding-right: 0px;
     padding-left: 0px;
-    padding-top: 72px;
-    padding-bottom:800px;
+    padding-top: 24px;
+    padding-bottom:500px;
   }
   .reserve_cardone {
     width:100%;
@@ -237,12 +295,12 @@ export default {
   }
   .banner {
     // height: 240px;
-    background-attachment: fixed;
-    background-image: url("https://i.imgur.com/agOEBLH.jpg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    max-width: 100%;
+    // background-attachment: fixed;
+    // background-image: url("https://i.imgur.com/agOEBLH.jpg");
+    // background-repeat: no-repeat;
+    // background-position: center;
+    // background-size: cover;
+    // max-width: 100%;
   }
  }
 </style>

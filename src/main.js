@@ -10,10 +10,14 @@ import 'bootstrap'
 import VueAxios from 'vue-axios'
 import axios from 'axios'
 import Loading from 'vue3-loading-overlay'
+import * as VueAos from 'vue-aos'
 // Import stylesheet
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
 import ProductsCart from '@/components/ProductsCart.vue'
-
+import SwiperCore, {
+  Pagination
+} from 'swiper/core'
+SwiperCore.use([Pagination])
 defineRule('email', email)
 defineRule('required', required)
 defineRule('min', min)
@@ -24,6 +28,7 @@ configure({
 setLocale('zh_TW')
 const app = createApp(App).use(router)
 app.use(VueAxios, axios)
+app.use(VueAos)
 app.component('Form', Form)
 app.component('Field', Field)
 app.component('ErrorMessage', ErrorMessage)
