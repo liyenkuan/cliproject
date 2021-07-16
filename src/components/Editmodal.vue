@@ -38,7 +38,7 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                         <label for="category">分類</label>
-                        <input id="category" type="text" class="form-control" v-model="data.category"
+                        <input id="category" type="text" class="form-control" v-model="editProduct.category"
                                 placeholder="請輸入分類">
                         </div>
                         <div class="form-group col-md-6">
@@ -104,10 +104,6 @@ export default {
       console.log('123')
       this.$emit('pushEdit', this.edit)
     }
-    // getData () {
-    //   this.data = this.edit
-    //   console.log(this.data)
-    // }
   },
   computed: {
     editProduct: function () {

@@ -35,39 +35,10 @@
               style="font-size:8px; width:16px;right: 1px;
                     top: -68px;
                     z-index: 11;">{{cartData.length}}</div>
-        <!--<div class="dropdown-menu dropdown-menu-end " aria-labelledby="dropdownMenuClickableInside" style="width:400px; padding:20px;">
-          <table class="table " >
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">品項</th>
-                <th scope="col">數量</th>
-                <th scope="col">價格</th>
-                <th scope="col">刪除</th>
-              </tr>
-            </thead>
-            <tbody v-for = "(item , key) in cartData" :key="key" >
-              <tr>
-                <th scope="row">{{key+1}}</th>
-                <td>{{item.product.category}}</td>
-                <td>{{item.qty}}</td>
-                <td>{{item.product.price}}</td>
-                <td  :data-id="item.id" @click="deletCart(item.id)">
-                  <span class="material-icons" style="font-size: 24px;" :data-id="item.id">
-                    delete
-                  </span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="mx-auto" style="width: 300px;">
-             <button type="button" class="btn btn-dark btn-lg btn-block  " style="width: 300px;" @click="openOrder()">全部購買</button>
-          </div>
-        </div>-->
       </div>
     </div>
    <footer class="footer   py-1 footer_calss" style="  background-color: black;opacity: 0.8;">
-    <div class="container">
+    <div class="container pt-3">
       <ul class="row d-flex flex-wrap" style="align-items: center;">
         <li class="footer_li">
           <span style="color:#47ABA7;">追蹤社群 ：</span>
@@ -94,8 +65,6 @@
 </template>
 
 <style lang="scss">
-// <router-link to="/">Home</router-link>
-// <router-link to="/about">week5</router-link>
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -145,7 +114,6 @@ quotes: "" "";
 @import "bootstrap";
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,900&display=swap');
 .navContainer{
-  // background-color: white;
   background-color: black;
   opacity: 0.8;
   font-weight: 900;
@@ -154,20 +122,16 @@ quotes: "" "";
   z-index:10;
 }
 .navColor{
-  // border-bottom: 3px solid white ;
   background-color: white;
 }
 .footer_calss{
   box-shadow: 5px 0px 6px #00000029;
 }
 .nav_one{
-  // margin: 0 auto;
-  // text-align: center;
   font-family: 'Krona One', sans-serif;
 }
 .nav_one a{
   font-size: 40px;
-  // font-family: 'Roboto', sans-serif;
   padding-left:64px;
 }
 
@@ -182,7 +146,6 @@ quotes: "" "";
 };
 .nav_ul li:hover{
   border-bottom: 3px solid #47ABA7; ;
-  // background-color: #9CBAC6;
 }
 .banner_container{
   padding-top: 0px;
@@ -193,7 +156,6 @@ quotes: "" "";
   font-weight: normal;
   font-style: normal;
   font-size: 32px;  /* Preferred icon size */
-  // display: inline-block;
   line-height: 0;
   text-transform: none;
   letter-spacing: normal;
@@ -236,14 +198,7 @@ quotes: "" "";
   position: fixed;
   top: 40px;
   right: 120px;
-  // border:3px solid #000;
-  // width: 100px;
-  // height: 100px;
-  // margin: 20px;
   color: #47ABA7;
-  // background-color:#9CBAC6;
-  // margin: 0 auto;
-  // padding:34px;
   font-size: 48px;
   z-index:10;
   cursor: pointer;
@@ -299,12 +254,11 @@ export default {
       this.axios.get(`${api}${cart}`)
         .then((res) => {
           this.isLoading = false
-          console.log(res)
+          // console.log(res)
           this.cartData = res.data.data.carts
-          console.log(this.cartData)
+          // console.log(this.cartData)
           this.orderData = this.cartData
           this.totalPrice()
-          // emitter.emit('update-cartdata')
         })
         .catch((error) => {
           console.log(error)
@@ -315,11 +269,10 @@ export default {
       console.log(id)
       this.axios.delete(`${api}${cart}/${id}`)
         .then((res) => {
-          console.log(res)
+          // console.log(res)
           this.getcart()
           this.isLoading = false
           myOrder.hide()
-          // emitter.emit('update-cartdata')
         })
         .catch((error) => {
           console.log(error)
@@ -332,24 +285,24 @@ export default {
     },
     totalPrice () {
       let price = 0
-      console.log(this.cartData)
+      // console.log(this.cartData)
       this.cartData.forEach((item) => {
         price += item.final_total
       })
       this.total = Math.round(price)
-      console.log(this.total)
+      // console.log(this.total)
     },
     postCouponCode (e) {
-      console.log(e)
+      // console.log(e)
       const coupon = 'api/password/coupon'
       const code = e
       this.axios.post(`${api}${coupon}`, { data: { code } })
         .then((res) => {
-          console.log(res)
+          // console.log(res)
           const finalTotal = Math.round(res.data.data.final_total)
-          console.log(finalTotal)
+          // console.log(finalTotal)
           const deductSum = this.total - finalTotal
-          console.log(deductSum)
+          // console.log(deductSum)
           this.deduct = deductSum
           this.getcart()
           this.totalPrice()
@@ -367,14 +320,6 @@ export default {
   },
   mounted () {
     navBtn = document.querySelector('.nav_ul')
-    // const navBGC = document.querySelector('.navContainer')
-    // window.onscroll = function () {
-    //   if (window.pageYOffset >= 100) {
-    //     navBGC.classList.add('navColor')
-    //   } else {
-    //     navBGC.classList.remove('navColor')
-    //   }
-    // }
     myOrder = new Modal(document.querySelector('#pushorderModal'))
     this.getcart()
     emitter.on('update-cart', () => {

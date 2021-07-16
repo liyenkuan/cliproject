@@ -184,7 +184,7 @@ export default {
       // console.log(page = 1)
       this.axios(`${api}${productsPath}admin/coupons?page=${page = 1}`)
         .then((res) => {
-          console.log(res)
+          // console.log(res)
           this.coupon = res.data.coupons
         })
         .catch((error) => {
@@ -195,12 +195,12 @@ export default {
       this.delitem = item.title
       this.deleteId = id
       deleteModal.show()
-      console.log(id)
+      // console.log(id)
     },
     deletProductsId () {
       this.axios.delete(`${api}${productsPath}admin/product/${this.deleteId}`)
         .then((res) => {
-          console.log(res)
+          // console.log(res)
           this.getProductas()
           this.deleteId = ''
           deleteModal.hide()
@@ -213,21 +213,21 @@ export default {
       couponModal.show()
     },
     postModal (e) {
-      console.log(e)
+      // console.log(e)
       const data = e
       this.axios.post(`${api}${productsPath}admin/product`, { data })
         .then((res) => {
-          console.log(res)
+          // console.log(res)
           this.getProductas()
           myModal.hide()
         })
     },
     postCoupon (item) {
-      console.log(item)
+      // console.log(item)
       const data = item
       this.axios.post(`${api}${productsPath}admin/coupon`, { data })
         .then((res) => {
-          console.log(res)
+          // console.log(res)
           couponModal.hide()
           this.getCoupon()
         })
@@ -248,7 +248,7 @@ export default {
       const data = e
       this.axios.put(`${api}${productsPath}admin/product/${id}`, { data })
         .then((res) => {
-          console.log(res)
+          // console.log(res)
           this.getProductas()
           editModal.hide()
         })
@@ -258,7 +258,7 @@ export default {
       this.axios.defaults.headers.common['Authorization'] = token //eslint-disable-line
       this.axios.post(`${api}api/user/check`)
         .then((res) => {
-          console.log(res)
+          // console.log(res)
         })
     }
   },

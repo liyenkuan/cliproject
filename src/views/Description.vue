@@ -67,7 +67,7 @@ export default {
       this.axios.get(`${api}${productsPath}/${id}`)
         .then((res) => {
           if (res.data.success) {
-            console.log(res)
+            // console.log(res)
             this.product = res.data.product
           }
         })
@@ -84,7 +84,7 @@ export default {
       const url = `${api}${cart}`
       this.axios.post(url, { data: { product_id: productId, qty } })
         .then((res) => {
-          console.log(res)
+          // console.log(res)
           this.status.loadingItem = ''
           emitter.emit('update-cart')
         })
@@ -99,7 +99,6 @@ export default {
     }
   },
   mounted () {
-    // this.id = this.$route.params.userId
     this.getProduct()
     toastEl = this.$refs.toast
     toast = new Toast(toastEl, {
@@ -126,7 +125,6 @@ export default {
           align-items: center;
 }
 .Des-input input{
-  // width: 30%;
   text-indent: 0.5rem;
   background-color: #F7F7F7;
   color: #818A91;
@@ -144,27 +142,13 @@ export default {
   font-size: 48px;
   font-family: 'Krona One', sans-serif;
   position: relative;
-  // letter-spacing: -4px;
 }
-// .Desworks_sub { <span class="Desworks_sub">Description</span>
-//   position: absolute;
-//   font-size: 32px;
-//   color: #E0E0E0;
-//   top:140px;
-//   left:300px;
-// }
 .Desconter {
-//   height:500px;
   padding-left: 40px;
   padding-bottom: 40px;
   margin: 0 auto;
-  // position: relative;
 }
 .Des_imgcontent{
-    // width:48%;123
-    // margin:10px;123
-    // border: 3px solid #000;
-    // height:500px;123
     padding-bottom:20px;
 }
 .Des_img {
@@ -175,22 +159,15 @@ export default {
   object-position: center ;
 }
 .Des_textcontent {
-    // width:48%;123
-    // margin:10px;123
-    // border: 3px solid #000;
     padding:40px;
     font-size:24px;
-    // text-align:center;
-    // height:500px;
-    // border-left :3px solid #000;
 }
 .img_shell {
     padding:20px;
 }
 .text_shell {
-    // padding-left:10px;
-    // border-left :3px solid #000;
-    height: 400px;
+    // height: 400px;
+    line-height: 1.5;
 }
 @media (max-width: 767px) {
     .Desworks_title {
@@ -204,13 +181,11 @@ export default {
         font-family: 'Krona One', sans-serif;
         text-align: center;
         position: relative;
-        // letter-spacing: -4px;
     }
     .Desworks_sub {
         display: none;
     }
     .Desconter {
-        // height:500px;
         padding-left: 0px;
         padding-bottom: 0px;
         margin: 0 auto;
@@ -218,17 +193,13 @@ export default {
     .Des_imgcontent{
         width:100%;
         margin:0px;
-        // border: 3px solid #000;
-        // height:250px;
     }
     .Des_textcontent {
         width:100%;
         margin:0px;
-        // border: 3px solid #000;
         padding:24px;
         padding-top:0px;
         font-size:24px;
-        // text-align:center;
         line-height:24px;
     }
     .img_shell {

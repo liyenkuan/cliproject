@@ -76,9 +76,6 @@ export default {
   position: absolute;
   top: 300px;
   right:320px;
-  // color: #C26029;
-  // font-size: 40px;
-  // font-weight: 900;
   font-family: 'Krona One', sans-serif;
   color: white;
 }
@@ -97,11 +94,9 @@ export default {
   background-color: #47ABA7;
   color: white;
   font-weight:900;
-  // border:0;
   font-size: 24px;
 }
 .banner_btn:hover {
-  // border: 2px solid #47ABA7;
   background-color: white;
   color: #47ABA7;
 }
@@ -109,15 +104,9 @@ export default {
   .bgcard {
     position: relative;
     height: 300px;
-    // padding-top:72px;
   }
   .card_text {
     display: none;
-    // position: absolute;
-    // top: 260px;
-    // right:130px;
-    // font-family: 'Krona One', sans-serif;
-    // color: white;
   }
   .img_class {
     height: 300px;

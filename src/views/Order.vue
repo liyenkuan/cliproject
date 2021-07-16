@@ -132,14 +132,12 @@ export default {
   },
   methods: {
     getcart () {
-    //   this.isLoading = true
       this.axios.get(`${api}${cart}cart`)
         .then((res) => {
-        //   this.isLoading = false
-          console.log(res)
+          // console.log(res)
           this.cartData = res.data.data.carts
           this.priceTotal = Math.round(res.data.data.final_total)
-          console.log(this.cartData)
+          // console.log(this.cartData)
         })
         .catch((error) => {
           console.log(error)
@@ -169,12 +167,12 @@ export default {
     createOrder () {
       this.isLoading = true
       this.form.user.address = `${this.city}${this.area}${this.region}`
-      console.log(this.form.user.address)
+      // console.log(this.form.user.address)
       const data = this.form
-      console.log(data)
+      // console.log(data)
       this.axios.post(`${api}${cart}order`, { data })
         .then((res) => {
-          console.log(res)
+          // console.log(res)
           emitter.emit('update-cart')
           this.myToast = res.data.message
           toast.show()

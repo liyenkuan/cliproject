@@ -3,7 +3,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="pushorderModal" style="color:#47ABA7; font-size:32px;">購物車列表</h5>
+        <h5 class="modal-title" id="pushorderModal" style="color:#47ABA7; font-weight: 900; font-size:32px;">購物車列表</h5>
       </div>
       <div class="modal-body ">
       <div id="modal_contect" ref="modal_contect" >
@@ -29,7 +29,7 @@
                 <td>{{item.product.price}}</td>
                 <td :data-id="item.id" class="m-auto text-center" >
                 <a href="###" class="d-block m-auto text-center" style="color: black;display: flex;">
-                  <span class="material-icons " style="font-size:24px;" :data-id="item.id" @click="deletCart(item.id)">
+                  <span class="material-icons " style="font-size:24px;" :data-id="item.id" @click.prevent="deletCart(item.id)">
                     delete
                   </span>
                 </a>
@@ -69,7 +69,6 @@
 </template>
 <script>
 import emitter from '@/assets/javascript/emitter'
-// let content = ''
 export default {
   props: ['cart', 'total', 'finalprice'],
   data () {
@@ -82,11 +81,10 @@ export default {
   methods: {
     deletCart (id) {
       this.$emit('pushId', id)
-      // this.isData()
     },
     postCoupon () {
       if (this.couponCode !== '') {
-        console.log(this.couponCode)
+        // console.log(this.couponCode)
         this.$emit('postCoupon', this.couponCode)
         this.couponCode = ''
       } else {
@@ -97,15 +95,13 @@ export default {
       this.$emit('openOrder')
     },
     isData () {
-      console.log(this.cartProduct.length)
+      // console.log(this.cartProduct.length)
       if (this.cartProduct.length === 0) {
-        // content.classList.add('content_none')
         this.isdisplay = false
       } else if (this.cartProduct.length > 0) {
-        // content.classList.remove('content_none')
         this.isdisplay = true
       }
-      console.log(this.deduct)
+      // console.log(this.deduct)
       if (this.deduct === 0) {
         this.isdiscount = false
       } else if (this.deduct > 0) {
@@ -125,8 +121,6 @@ export default {
     }
   },
   mounted () {
-    // content = this.$refs.modal_contect
-    // this.isData()
     emitter.on('update-cartdata', () => {
       this.isData()
     })

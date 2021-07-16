@@ -32,6 +32,33 @@
           </div>-->
       </li>
 </ul>
+<nav aria-label="Page navigation example py-3">
+  <ul class="pagination justify-content-center">
+    <li class="page-item" v-if="pages.has_pre">
+      <a class="page-link" href="#" aria-label="Previous" @click.prevent="updatePage(pages.current_page-1)">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li class="page-item disabled" v-else>
+      <a class="page-link" href="#" aria-label="Previous" >
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li class="page-item" v-for="(item, key) in pages.total_pages" :key="key" :class="{ 'active' : item === pages.current_page}">
+      <a class="page-link" href="#" @click.prevent="updatePage(item)">{{item}}</a>
+    </li>
+    <li class="page-item" v-if="pages.has_next">
+      <a class="page-link" href="#" aria-label="Next" :key="pages.current_page" @click.prevent="updatePage(pages.current_page+1)">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+    <li class="page-item disabled" v-else>
+      <a class="page-link " href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
 </template>
 <script>
 const api = 'https://vue3-course-api.hexschool.io/'
@@ -40,18 +67,20 @@ export default {
   data () {
     return {
       products: [],
-      isLoading: false
+      isLoading: false,
+      pages: []
     }
   },
   methods: {
-    getProducts () {
+    getProducts (page = 1) {
       this.isLoading = true
-      this.axios.get(`${api}api/password/products`)
+      this.axios.get(`${api}api/password/products?page=${page}`)
         .then((response) => {
           this.isLoading = false
           if (response.data.success) {
-            console.log(response)
+            // console.log(response)
             this.products = response.data.products
+            this.pages = response.data.pagination
           }
         })
         .catch(function (error) {
@@ -62,6 +91,10 @@ export default {
     toProductspage (id) {
       this.$router.push({ name: 'Descriptiont', query: { productsId: `${id}` } })
       // this.$router.push(`/products/${id}`)
+    },
+    updatePage (e) {
+      // console.log(e)
+      this.getProducts(e)
     }
   },
   created () {
@@ -73,28 +106,21 @@ export default {
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,900&display=swap');
 .productworks_title {
-  // padding-bottom: 80px;
   padding: 40px;
-  // padding-top: 120px;
   padding-left:72px;
   font-weight: 900;
   font-size: 48px;
   font-family: 'Krona One', sans-serif;
-  // text-align: center;
   position: relative;
-  // letter-spacing: -4px;
-    // padding-bottom: 80px;
   color:#47ABA7;
 }
 .productcardUl {
   padding-right: 80px;
   padding-left: 80px;
-  // background-color: #F7F7F7;
   padding-top:20px;
 }
 .productcardLi  {
   width: 400px;
-  // padding-bottom: 20px;
   height: 200px;
   background-color: white;
   margin-right: 50px;
@@ -112,8 +138,6 @@ export default {
 }
 .card {
   border-radius:0;
-  // box-shadow: 1px 1px 1px 1px #ADADAD;
-  // height:300px;
 }
 .card_body {
   margin: 0 auto;
@@ -150,7 +174,6 @@ export default {
    color:#969c9e;
 }
 .couponBanner{
-  /* display: flex; */
   background-attachment: fixed;
   background-image: url("https://i.imgur.com/ZpI27FU.jpg");
   background-repeat: no-repeat;
@@ -158,17 +181,13 @@ export default {
   background-size: cover;
   max-width: 100%;
   height: 500px;
-  // margin: auto;
 }
 .coupon_content {
-  // display:flex;
   width: 50%;
-  // height:300px;
   background-color:white;
   opacity: 0.6;
   margin: 0 auto;
   text-align:center;
-  // align-items: center;
 }
 @media (max-width: 767px) {
   .productcardUl {
@@ -179,7 +198,6 @@ export default {
     margin-right: 0px;
   }
   .productworks_title {
-    // padding-top: 120px;
     padding-bottom: 24px;
     padding-left:0px;
     padding-right:0px;
@@ -189,7 +207,6 @@ export default {
     font-family: 'Krona One', sans-serif;
     text-align: center;
     position: relative;
-    // letter-spacing: -4px;
   }
   .card_body {
     margin: 0 auto;
@@ -201,7 +218,7 @@ export default {
     position: absolute;
     box-sizing: border-box;
     background-color: rgba(0,0,0,.3);
-    padding-top: 160px
+    padding-top: 60px
 }
 .card_btn {
   color :white;
@@ -216,14 +233,11 @@ export default {
     opacity: 1;
   }
   .coupon_content {
-    // display:flex;
     width: 80%;
-    // height:300px;
     background-color:white;
     opacity: 0.6;
     margin: 0 auto;
     text-align:center;
-    // align-items: center;
   }
  }
 </style>

@@ -61,29 +61,27 @@ export default {
   },
   methods: {
     onSubmit () {
-      // myModal.show()
       if (this.user.email !== '' || this.user.password !== '') {
-        console.log(this.user)
+        // console.log(this.user)
         const url = `${api}${signinPath}`
-        console.log(url)
+        // console.log(url)
         const user = {
           username: this.user.email,
           password: this.user.password
         }
-        console.log(user)
+        // console.log(user)
         this.axios.post(url, user)
           .then((res) => {
-            console.log(res)
+            // console.log(res)
             if (res.data.message === '登入成功') {
               const token = res.data.token
-              console.log(token)
+              // console.log(token)
               const expired = res.data.expired
-              console.log(expired)
+              // console.log(expired)
               document.cookie = `hexToken=${token}; expires=${new Date(expired)}`
               this.myToast = '登入成功'
               toast.show()
               setTimeout(() => { this.toEdit() }, 3000)
-              // this.$router.push('/backside/Editproduct')
             } else {
               this.myToast = '登入失敗'
               toast.show()
@@ -91,8 +89,6 @@ export default {
           })
           .catch((error) => {
             console.log(error)
-            // this.myToast = '登入失敗'
-            // toast.show()
           })
       } else {
         alert('error')
@@ -120,7 +116,7 @@ export default {
       this.axios.defaults.headers.common['Authorization'] = token //eslint-disable-line
       this.axios.post(`${api}api/user/check`)
         .then((res) => {
-          console.log(res)
+          // console.log(res)
           if (res.data.success) {
             this.$router.push('/backside/Editproduct')
           }
